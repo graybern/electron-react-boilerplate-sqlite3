@@ -26,4 +26,11 @@ const electronHandler = {
 
 contextBridge.exposeInMainWorld('electron', electronHandler);
 
+contextBridge.exposeInMainWorld('api', {
+  addUser: (user: any) => ipcRenderer.invoke('add-user', user),
+  getUsers: () => ipcRenderer.invoke('get-users'),
+  updateUser: (user: any) => ipcRenderer.invoke('update-user', user),
+  deleteUser: (id: any) => ipcRenderer.invoke('delete-user', id),
+});
+
 export type ElectronHandler = typeof electronHandler;
